@@ -302,7 +302,7 @@
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            border: 2px solid var(--color-accent);
+            border: 2px solid var(--color-accept);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -485,10 +485,43 @@
             to { opacity: 1; }
         }
 
+        /* Subcategorias do menu */
+        .menu-category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-category-tab {
+            padding: 6px 12px;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid var(--color-accent);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .menu-category-tab.active {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .menu-category-content {
+            display: none;
+        }
+
+        .menu-category-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
         .menu-section {
             margin: 1.2rem 0;
             padding: 1rem 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .menu-section-title {
@@ -526,32 +559,6 @@
             margin: 0.5rem 0;
             font-style: italic;
             color: var(--color-accent);
-        }
-
-        /* Menu compacto */
-        .menu-compact-section {
-            margin: 1.5rem 0;
-        }
-
-        .menu-compact-title {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .menu-compact-title i {
-            margin-right: 8px;
-            color: var(--color-accent);
-        }
-
-        .menu-compact-items {
-            color: var(--color-text-dark);
-            font-size: 0.9rem;
-            line-height: 1.4;
         }
 
         /* Rodapé */
@@ -677,6 +684,11 @@
                 font-size: 0.8rem;
             }
             
+            .menu-category-tab {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
             .elegant-maps-button {
                 width: 50px;
                 height: 50px;
@@ -734,7 +746,7 @@
         </div>
 
         <p class="message">
-            Com gratidão no coração, celebramos cinco décadas de união, amor и cumplicidade.
+            Com gratidão no coração, celebramos cinco décadas de união, amor e cumplicidade.
             Convidamo-vos a partilhar este momento tão especial.
         </p>
 
@@ -790,36 +802,50 @@
             </div>
 
             <div id="adulto" class="menu-content active">
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-bread-slice"></i> Couvert</div>
-                    <div class="menu-compact-items">Pão, manteiga, azeitonas e Queijo da Azoia</div>
+                <div class="menu-category-tabs">
+                    <div class="menu-category-tab active" onclick="changeMenuCategory('adulto', 'couvert')">Couvert</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('adulto', 'entrada')">Entrada</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('adulto', 'principal')">Principal</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('adulto', 'sobremesa')">Sobremesa</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('adulto', 'bebidas')">Bebidas</div>
                 </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-fish"></i> Entrada</div>
-                    <div class="menu-compact-items">Ameijoas à Bulhão Pato</div>
-                </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-drumstick-bite"></i> Prato Principal</div>
-                    <div class="menu-compact-items">
-                        Massa de Peixe<br>
-                        <div class="menu-divider">ou</div>
-                        Bife de Vazia à Pimenta
+
+                <div id="adulto-couvert" class="menu-category-content active">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-bread-slice"></i> Couvert</h3>
+                        <p class="menu-item">Pão, manteiga, azeitonas e Queijo da Azoia</p>
                     </div>
                 </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-ice-cream"></i> Sobremesa</div>
-                    <div class="menu-compact-items">Crepe com Gelado</div>
+
+                <div id="adulto-entrada" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-fish"></i> Entrada</h3>
+                        <p class="menu-item">Ameijoas à Bulhão Pato</p>
+                    </div>
                 </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-glass-cheers"></i> Bebidas</div>
-                    <div class="menu-compact-items">
-                        2 Cervejas/Águas/Refrigerantes por pessoa<br>
-                        <div class="menu-divider">ou</div>
-                        1 Sangria / Garrafa de Vinho Tinto ou Branco por cada 2 pessoas
+
+                <div id="adulto-principal" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-drumstick-bite"></i> Prato Principal</h3>
+                        <p class="menu-item">Massa de Peixe</p>
+                        <p class="menu-divider">ou</p>
+                        <p class="menu-item">Bife de Vazia à Pimenta</p>
+                    </div>
+                </div>
+
+                <div id="adulto-sobremesa" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-ice-cream"></i> Sobremesa</h3>
+                        <p class="menu-item">Crepe com Gelado</p>
+                    </div>
+                </div>
+
+                <div id="adulto-bebidas" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-glass-cheers"></i> Bebidas</h3>
+                        <p class="menu-item">2 Cervejas/Águas/Refrigerantes por pessoa</p>
+                        <p class="menu-divider">ou</p>
+                        <p class="menu-item">1 Sangria / Garrafa de Vinho Tinto ou Branco por cada 2 pessoas</p>
                     </div>
                 </div>
                 
@@ -829,36 +855,41 @@
             </div>
 
             <div id="crianca" class="menu-content">
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-apple-alt"></i> Entrada</div>
-                    <div class="menu-compact-items">Creme de Legumes</div>
+                <div class="menu-category-tabs">
+                    <div class="menu-category-tab active" onclick="changeMenuCategory('crianca', 'entrada')">Entrada</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('crianca', 'principal')">Principal</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('crianca', 'sobremesa')">Sobremesa</div>
+                    <div class="menu-category-tab" onclick="changeMenuCategory('crianca', 'bebidas')">Bebidas</div>
                 </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-hamburger"></i> Prato Principal</div>
-                    <div class="menu-compact-items">
-                        Hamburger com batata frita e arroz<br>
-                        <div class="menu-divider">ou</div>
-                        Peito de Frango com batata frita e arroz<br>
-                        <div class="menu-divider">ou</div>
-                        Bitoque com batata frita e arroz<br>
-                        <div class="menu-divider">ou</div>
-                        Panado de Peixe com batata frita e arroz
+
+                <div id="crianca-entrada" class="menu-category-content active">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-apple-alt"></i> Entrada</h3>
+                        <p class="menu-item">Creme de Legumes</p>
                     </div>
                 </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-ice-cream"></i> Sobremesa</div>
-                    <div class="menu-compact-items">
-                        Bola de Gelado<br>
-                        <div class="menu-divider">ou</div>
-                        Fruta da época
+
+                <div id="crianca-principal" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-hamburger"></i> Prato Principal</h3>
+                        <p class="menu-item">Bitoque com batata frita e arroz</p>
                     </div>
                 </div>
-                
-                <div class="menu-compact-section">
-                    <div class="menu-compact-title"><i class="fas fa-glass-cheers"></i> Bebidas</div>
-                    <div class="menu-compact-items">2 Águas ou Refrigerantes por Criança</div>
+
+                <div id="crianca-sobremesa" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-ice-cream"></i> Sobremesa</h3>
+                        <p class="menu-item">Bola de Gelado</p>
+                        <p class="menu-divider">ou</p>
+                        <p class="menu-item">Fruta da época</p>
+                    </div>
+                </div>
+
+                <div id="crianca-bebidas" class="menu-category-content">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title"><i class="fas fa-glass-cheers"></i> Bebidas</h3>
+                        <p class="menu-item">2 Águas ou Refrigerantes por Criança</p>
+                    </div>
                 </div>
                 
                 <div class="menu-price">
@@ -879,7 +910,7 @@
                 <i class="fas fa-map-marked-alt" style="font-size: 2.5rem; color: #d4af37;"></i>
             </div>
             <p><em>Estacionamento disponível no local</em></p>
-            <p><em>(Estacionamento do Hotel)</em></p>
+            <p><em>Estacionamento do Hotel</em></p>
             
             <!-- Botão do Google Maps Elegante -->
             <a href="https://www.google.com/maps?hl=pt-PT&gl=pt&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd19518a7d5df1e3:0xb0aa816fedd9765c" 
@@ -947,6 +978,30 @@
 
             // Mostrar a aba selecionada e defini-la como ativa
             document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Resetar as categorias para a primeira opção
+            if (tabId === 'adulto') {
+                changeMenuCategory('adulto', 'couvert');
+            } else if (tabId === 'crianca') {
+                changeMenuCategory('crianca', 'entrada');
+            }
+        }
+
+        // Funcionalidade das subcategorias do menu
+        function changeMenuCategory(menuType, categoryId) {
+            // Esconder todos os conteúdos da categoria
+            document.querySelectorAll(`#${menuType} .menu-category-content`).forEach(category => {
+                category.classList.remove('active');
+            });
+
+            // Remover a classe active de todas as abas de categoria
+            document.querySelectorAll(`#${menuType} .menu-category-tab`).forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Mostrar a categoria selecionada e defini-la como ativa
+            document.getElementById(`${menuType}-${categoryId}`).classList.add('active');
             event.target.classList.add('active');
         }
 
