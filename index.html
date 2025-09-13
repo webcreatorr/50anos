@@ -35,6 +35,113 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Overlay para a homenagem */
+        .tribute-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .tribute-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tribute-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .tribute-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--color-accent);
+        }
+
+        .wedding-rings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            color: var(--color-accent);
+            opacity: 0;
+            animation: ringsAnimation 3s ease-in-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes ringsAnimation {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            70% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+        }
+
+        .close-tribute {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--color-accent);
+            color: var(--color-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-tribute:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+
+        .tribute-message {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            font-family: var(--font-heading);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInOut 3s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         /* Cartão de convite */
@@ -48,6 +155,14 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
             color: var(--color-primary);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .invitation-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .invitation-card::before {
@@ -551,11 +666,33 @@
             .elegant-maps-button i {
                 font-size: 1.3rem;
             }
+
+            .tribute-image {
+                max-width: 280px;
+            }
+
+            .wedding-rings {
+                font-size: 45px;
+            }
+
+            .tribute-message {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="invitation-card">
+    <!-- Overlay de Homenagem -->
+    <div class="tribute-overlay" id="tributeOverlay">
+        <div class="tribute-container">
+            <div class="close-tribute" onclick="closeTribute()">&times;</div>
+            <img src="https://i.postimg.cc/dkrBJq9L/unnamed.jpg" alt="Maria e Manuel - 50 anos de casamento" class="tribute-image">
+            <div class="wedding-rings">💍</div>
+            <div class="tribute-message">50 Anos de Amor e Companheirismo</div>
+        </div>
+    </div>
+
+    <div class="invitation-card" id="invitationCard">
         <div class="floral-corner corner-tl">❖</div>
         <div class="floral-corner corner-tr">❖</div>
         <div class="floral-corner corner-bl">❖</div>
@@ -601,7 +738,7 @@
         <div class="ceremony-details">
             <h2>Celebração</h2>
             <p class="date">18 de Outubro de 2025</p>
-            <p>Às 19:30 horas</p>
+            <p>Às 18:30 horas</p>
             <div class="location">
                 <p>Restaurante: O Canhão II, Sesimbra</p>
             </div>
@@ -620,8 +757,6 @@
             <button class="close-modal" onclick="closeModal('dressCodeModal')">&times;</button>
             <h2 class="modal-title">Dress Code</h2>
             <div class="dress-code-theme">Elegante & Sofisticado</div>
-            <p>Para celebrar esta ocasião especial,<br>convidamos todos a vestirem-se elegantemente.</p>
-            <p><em>Traje formal é bem-vindo!</em></p>
         </div>
     </div>
 
@@ -657,6 +792,7 @@
                 <div class="menu-section">
                     <h3 class="menu-section-title"><i class="fas fa-drumstick-bite"></i> Prato Principal</h3>
                     <p class="menu-item">Massa de Peixe</p>
+                    <p class="menu-item">ou</p>
                     <p class="menu-item">Bife de Vazia à Pimenta</p>
                 </div>
             </div>
@@ -689,6 +825,7 @@
                 <i class="fas fa-map-marked-alt" style="font-size: 2.5rem; color: #d4af37;"></i>
             </div>
             <p><em>Estacionamento disponível no local</em></p>
+            <p><em>Estacionamento do Hotel</em></p>
             
             <!-- Botão do Google Maps Elegante -->
             <a href="https://www.google.com/maps?hl=pt-PT&gl=pt&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd19518a7d5df1e3:0xb0aa816fedd9765c" 
@@ -699,6 +836,36 @@
     </div>
 
     <script>
+        // Função para mostrar a homenagem
+        function showTribute() {
+            const tributeOverlay = document.getElementById('tributeOverlay');
+            const invitationCard = document.getElementById('invitationCard');
+            
+            // Mostrar o overlay de homenagem
+            tributeOverlay.classList.remove('hidden');
+            
+            // Esconder o cartão de convite inicialmente
+            invitationCard.classList.remove('visible');
+            
+            // Após 3 segundos, esconder a homenagem e mostrar o convite
+            setTimeout(() => {
+                tributeOverlay.classList.add('hidden');
+                invitationCard.classList.add('visible');
+            }, 5000); // 5 segundos no total (2 segundos para a animação dos anéis + 3 segundos)
+        }
+
+        // Função para fechar a homenagem manualmente
+        function closeTribute() {
+            const tributeOverlay = document.getElementById('tributeOverlay');
+            const invitationCard = document.getElementById('invitationCard');
+            
+            tributeOverlay.classList.add('hidden');
+            invitationCard.classList.add('visible');
+        }
+
+        // Iniciar a homenagem quando a página carregar
+        window.addEventListener('load', showTribute);
+
         // Funções para mostrar modais
         function showDressCode() {
             document.getElementById('dressCodeModal').classList.add('active');
