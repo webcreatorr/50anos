@@ -106,30 +106,6 @@
             }
         }
 
-        .close-tribute {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--color-accent);
-            color: var(--color-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 20;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .close-tribute:hover {
-            transform: scale(1.1);
-            background: #fff;
-        }
-
         .tribute-message {
             margin-top: 20px;
             font-size: 1.5rem;
@@ -448,6 +424,7 @@
             font-size: 1.8rem;
             cursor: pointer;
             transition: color 0.3s ease;
+            z-index: 10;
         }
 
         .close-modal:hover {
@@ -533,6 +510,48 @@
             margin: 0.6rem 0;
             color: var(--color-text-dark);
             font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .menu-price {
+            font-weight: bold;
+            color: var(--color-accent);
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            padding: 0.8rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .menu-divider {
+            margin: 0.5rem 0;
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        /* Menu compacto */
+        .menu-compact-section {
+            margin: 1.5rem 0;
+        }
+
+        .menu-compact-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-compact-title i {
+            margin-right: 8px;
+            color: var(--color-accent);
+        }
+
+        .menu-compact-items {
+            color: var(--color-text-dark);
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         /* Rodapé */
@@ -685,7 +704,6 @@
     <!-- Overlay de Homenagem -->
     <div class="tribute-overlay" id="tributeOverlay">
         <div class="tribute-container">
-            <div class="close-tribute" onclick="closeTribute()">&times;</div>
             <img src="https://i.postimg.cc/dkrBJq9L/unnamed.jpg" alt="Maria e Manuel - 50 anos de casamento" class="tribute-image">
             <div class="wedding-rings">💍</div>
             <div class="tribute-message">50 Anos de Amor e Companheirismo</div>
@@ -716,7 +734,7 @@
         </div>
 
         <p class="message">
-            Com gratidão no coração, celebramos cinco décadas de união, amor e cumplicidade.
+            Com gratidão no coração, celebramos cinco décadas de união, amor и cumplicidade.
             Convidamo-vos a partilhar este momento tão especial.
         </p>
 
@@ -767,48 +785,84 @@
             <h2 class="modal-title">Cardápio</h2>
 
             <div class="menu-tabs">
-                <div class="menu-tab active" onclick="changeMenuTab('couvert')">Couvert</div>
-                <div class="menu-tab" onclick="changeMenuTab('entrada')">Entrada</div>
-                <div class="menu-tab" onclick="changeMenuTab('principal')">Principal</div>
-                <div class="menu-tab" onclick="changeMenuTab('sobremesa')">Sobremesa</div>
-                <div class="menu-tab" onclick="changeMenuTab('bebidas')">Bebidas</div>
+                <div class="menu-tab active" onclick="changeMenuTab('adulto')">Adulto</div>
+                <div class="menu-tab" onclick="changeMenuTab('crianca')">Criança</div>
             </div>
 
-            <div id="couvert" class="menu-content active">
-                <div class="menu-section">
-                    <h3 class="menu-section-title"><i class="fas fa-bread-slice"></i> Couvert</h3>
-                    <p class="menu-item">Pão, manteiga, azeitonas e Queijo da Azoia</p>
+            <div id="adulto" class="menu-content active">
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-bread-slice"></i> Couvert</div>
+                    <div class="menu-compact-items">Pão, manteiga, azeitonas e Queijo da Azoia</div>
+                </div>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-fish"></i> Entrada</div>
+                    <div class="menu-compact-items">Ameijoas à Bulhão Pato</div>
+                </div>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-drumstick-bite"></i> Prato Principal</div>
+                    <div class="menu-compact-items">
+                        Massa de Peixe<br>
+                        <div class="menu-divider">ou</div>
+                        Bife de Vazia à Pimenta
+                    </div>
+                </div>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-ice-cream"></i> Sobremesa</div>
+                    <div class="menu-compact-items">Crepe com Gelado</div>
+                </div>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-glass-cheers"></i> Bebidas</div>
+                    <div class="menu-compact-items">
+                        2 Cervejas/Águas/Refrigerantes por pessoa<br>
+                        <div class="menu-divider">ou</div>
+                        1 Sangria / Garrafa de Vinho Tinto ou Branco por cada 2 pessoas
+                    </div>
+                </div>
+                
+                <div class="menu-price">
+                    Preço: 32,50€ por pessoa
                 </div>
             </div>
 
-            <div id="entrada" class="menu-content">
-                <div class="menu-section">
-                    <h3 class="menu-section-title"><i class="fas fa-fish"></i> Entrada</h3>
-                    <p class="menu-item">Ameijoas à Bulhão Pato</p>
+            <div id="crianca" class="menu-content">
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-apple-alt"></i> Entrada</div>
+                    <div class="menu-compact-items">Creme de Legumes</div>
                 </div>
-            </div>
-
-            <div id="principal" class="menu-content">
-                <div class="menu-section">
-                    <h3 class="menu-section-title"><i class="fas fa-drumstick-bite"></i> Prato Principal</h3>
-                    <p class="menu-item">Massa de Peixe</p>
-                    <p class="menu-item">ou</p>
-                    <p class="menu-item">Bife de Vazia à Pimenta</p>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-hamburger"></i> Prato Principal</div>
+                    <div class="menu-compact-items">
+                        Hamburger com batata frita e arroz<br>
+                        <div class="menu-divider">ou</div>
+                        Peito de Frango com batata frita e arroz<br>
+                        <div class="menu-divider">ou</div>
+                        Bitoque com batata frita e arroz<br>
+                        <div class="menu-divider">ou</div>
+                        Panado de Peixe com batata frita e arroz
+                    </div>
                 </div>
-            </div>
-
-            <div id="sobremesa" class="menu-content">
-                <div class="menu-section">
-                    <h3 class="menu-section-title"><i class="fas fa-ice-cream"></i> Sobremesa</h3>
-                    <p class="menu-item">Crepe com Gelado</p>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-ice-cream"></i> Sobremesa</div>
+                    <div class="menu-compact-items">
+                        Bola de Gelado<br>
+                        <div class="menu-divider">ou</div>
+                        Fruta da época
+                    </div>
                 </div>
-            </div>
-
-            <div id="bebidas" class="menu-content">
-                <div class="menu-section">
-                    <h3 class="menu-section-title"><i class="fas fa-glass-cheers"></i> Bebidas</h3>
-                    <p class="menu-item">2 Cervejas/Águas/Refrigerantes por pessoa</p>
-                    <p class="menu-item">ou 1 Sangria / Garrafa de Vinho Tinto ou Branco por cada 2 pessoas</p>
+                
+                <div class="menu-compact-section">
+                    <div class="menu-compact-title"><i class="fas fa-glass-cheers"></i> Bebidas</div>
+                    <div class="menu-compact-items">2 Águas ou Refrigerantes por Criança</div>
+                </div>
+                
+                <div class="menu-price">
+                    Preço: 18,00€ por criança
                 </div>
             </div>
         </div>
@@ -825,7 +879,7 @@
                 <i class="fas fa-map-marked-alt" style="font-size: 2.5rem; color: #d4af37;"></i>
             </div>
             <p><em>Estacionamento disponível no local</em></p>
-            <p><em>Estacionamento do Hotel</em></p>
+            <p><em>(Estacionamento do Hotel)</em></p>
             
             <!-- Botão do Google Maps Elegante -->
             <a href="https://www.google.com/maps?hl=pt-PT&gl=pt&um=1&ie=UTF-8&fb=1&sa=X&ftid=0xd19518a7d5df1e3:0xb0aa816fedd9765c" 
@@ -851,16 +905,7 @@
             setTimeout(() => {
                 tributeOverlay.classList.add('hidden');
                 invitationCard.classList.add('visible');
-            }, 5000); // 5 segundos no total (2 segundos para a animação dos anéis + 3 segundos)
-        }
-
-        // Função para fechar a homenagem manualmente
-        function closeTribute() {
-            const tributeOverlay = document.getElementById('tributeOverlay');
-            const invitationCard = document.getElementById('invitationCard');
-            
-            tributeOverlay.classList.add('hidden');
-            invitationCard.classList.add('visible');
+            }, 3000); // 3 segundos para a animação dos anéis
         }
 
         // Iniciar a homenagem quando a página carregar
